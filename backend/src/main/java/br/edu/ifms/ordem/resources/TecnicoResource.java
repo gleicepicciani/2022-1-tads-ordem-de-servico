@@ -22,9 +22,9 @@ public class TecnicoResource {
 		list.add(new Tecnico(1L, "Carlos Almeida", "(67) 98978-4542", "carlos@gmail.com", "124"));
 		
 		//vai criar um pacote http 
-		return ResponseEntity.ok().body(null);
+		return ResponseEntity.ok().body(list);
 		
 		//verbo idepotente - delete, put e get - ele executa só uma vez
-		
 	}
+	
 }

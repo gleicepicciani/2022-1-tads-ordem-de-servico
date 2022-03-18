@@ -2,21 +2,29 @@ package br.edu.ifms.ordem.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "tb_tecnico")
 public class Tecnico implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String telefone;
 	private String email;
 	private String senha;
 	
-	public Tecnico() {
-		
+	public Tecnico() {		
 	}
 
-	//construtor com todos os atributos -- excluir o super
+	//construtor com todos os atributos -- excluir o super --criar o construtor com o botao direito e clicar na opção using fields e selecionar todos os atributos
 	public Tecnico(Long id, String nome, String telefone, String email, String senha) {
 		this.id = id;
 		this.nome = nome;
@@ -24,7 +32,8 @@ public class Tecnico implements Serializable {
 		this.email = email;
 		this.senha = senha;
 	}
-
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -89,10 +98,4 @@ public class Tecnico implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-
 }
