@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifms.ordem.dto.TecnicoDTO;
 import br.edu.ifms.ordem.entities.Tecnico;
 import br.edu.ifms.ordem.services.TecnicoService;
 
@@ -21,8 +22,8 @@ public class TecnicoResource {
 	
 	
 	@GetMapping	
-	public ResponseEntity<List<Tecnico>> findAll(){//ele empacota 
-		List<Tecnico> list = service.findAll();			
+	public ResponseEntity<List<TecnicoDTO>> findAll(){//ele empacota 
+		List<TecnicoDTO> list = service.findAll();			
 		//vai criar um pacote http 
 		return ResponseEntity.ok().body(list);
 		
