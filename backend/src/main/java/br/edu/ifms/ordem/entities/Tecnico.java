@@ -32,8 +32,7 @@ public class Tecnico implements Serializable {
 		this.email = email;
 		this.senha = senha;
 	}
-	
-	
+		
 	public Long getId() {
 		return id;
 	}
