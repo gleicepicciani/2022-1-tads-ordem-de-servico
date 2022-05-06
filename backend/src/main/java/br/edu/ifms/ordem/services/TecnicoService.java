@@ -1,6 +1,5 @@
 package br.edu.ifms.ordem.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,6 @@ import br.edu.ifms.ordem.dto.TecnicoDTO;
 import br.edu.ifms.ordem.entities.Tecnico;
 import br.edu.ifms.ordem.repositories.TecnicoRepository;
 import br.edu.ifms.ordem.services.exceptions.DataBaseException;
-import br.edu.ifms.ordem.services.exceptions.ResourceNotFoundException;
 import br.edu.ifms.ordem.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -39,6 +39,12 @@ public class TecnicoService {
 //		return listDto;		
 		//t=varredura
 		return list.stream().map(t -> new TecnicoDTO(t)).collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<TecnicoDTO> findAllPaged(PageRequest pageRequest) {
+		Page<Tecnico> list = repository.findAll(pageRequest);
+		return list.map(x -> new TecnicoDTO(x));
 	}
 	
 	

@@ -1,11 +1,17 @@
 package br.edu.ifms.ordem.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +27,21 @@ public class Tecnico implements Serializable {
 	private String email;
 	private String senha;
 	
-	public Tecnico() {		
+	//relacionamento bi-direcional
+	@OneToMany(mappedBy = "tecnico") //já foi mapeado no atributo tecnico em ordem de serviço
+	private List<OrdemDeServico> ordemDeServicos;
+	
+	
+	/**
+	 * Informações de auditoria 
+	 */
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant createdAt;
+	
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant updateAt;
+	
+    public Tecnico() {		
 	}
 
 	//construtor com todos os atributos -- excluir o super --criar o construtor com o botao direito e clicar na opção using fields e selecionar todos os atributos
@@ -72,6 +92,33 @@ public class Tecnico implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public Instant getUpdateAt() {
+		return updateAt;
+	}
+	
+	
+	
+	//buscar somente o get do ordem de serviço
+	public List<OrdemDeServico> getOrdemDeServicos() {
+		return ordemDeServicos;
+	}
+
+	//método para setar as variáveis de auditoria
+	@PrePersist
+	public void prePersist() {
+		createdAt = Instant.now();		
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		updateAt = Instant.now();	
+	}
+	
 
 	@Override
 	public int hashCode() {
