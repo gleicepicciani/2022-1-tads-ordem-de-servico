@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,24 +20,35 @@ public class Equipamento implements Serializable {
 	private Long id;
 	private String equipamento;
 	private String patrimonio;
-	private String setor;
+		
+	
+	//atributo que representa o relacionamento com o técnico
+	@ManyToOne //muitos pra um, olhando pra tabela ordem de servico
+	@JoinColumn(name = "id_setor_fk")
+	private Setor setor;
+	
+	
+		
+	
 	
 	//construtor vazio
 	public Equipamento() {	
 	}
 
 	//construtor com todos os atributos
-	public Equipamento(Long id, String equipamento, String patrimonio, String setor) {		
+	public Equipamento(Long id, String equipamento, String patrimonio, Setor setor) {
 		this.id = id;
 		this.equipamento = equipamento;
 		this.patrimonio = patrimonio;
 		this.setor = setor;
 	}
 
+
 	public Long getId() {
 		return id;
 	}
 
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -56,11 +69,13 @@ public class Equipamento implements Serializable {
 		this.patrimonio = patrimonio;
 	}
 
-	public String getSetor() {
+	
+
+	public Setor getSetor() {
 		return setor;
 	}
 
-	public void setSetor(String setor) {
+	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
 
@@ -88,6 +103,5 @@ public class Equipamento implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 }

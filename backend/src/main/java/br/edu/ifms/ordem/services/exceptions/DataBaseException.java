@@ -1,6 +1,7 @@
 package br.edu.ifms.ordem.services.exceptions;
 
 
+
 //herda de RuntimeException
 public class DataBaseException extends RuntimeException {
 

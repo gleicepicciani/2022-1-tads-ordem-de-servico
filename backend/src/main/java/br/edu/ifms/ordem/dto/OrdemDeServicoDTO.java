@@ -26,10 +26,9 @@ public class OrdemDeServicoDTO  implements Serializable{
 	//list -- como na entidade já é garantido pelo set que não terá duplicidade, por isso aqui pode ser list
  	private List<EquipamentoDTO> equipamentos = new ArrayList<>();
  	
+ 	//necessário para máquina java, a máquina precisa de uma sobrecarga
  	public OrdemDeServicoDTO() {
-		// TODO Auto-generated constructor stub
 	}
-
  	
  	//nesse construtor nao incluimos a lista de equipamentos
 	public OrdemDeServicoDTO(Long id, String descricaoProblema, String descricaoSolucao, Date dataCadastro,

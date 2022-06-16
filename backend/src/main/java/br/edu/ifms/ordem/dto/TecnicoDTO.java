@@ -13,6 +13,7 @@ public class TecnicoDTO implements Serializable{
 	private String email;
 	private String senha;
 	
+	//necessário para máquina java, a máquina precisa de uma sobrecarga
 	public TecnicoDTO () {		
 	}
 	

@@ -11,6 +11,4 @@ public class ResourceNotFoundException extends RuntimeException {
 		super(msg);		 // super é o construtor do RuntimeException
 	}
 	
-	
-
 }

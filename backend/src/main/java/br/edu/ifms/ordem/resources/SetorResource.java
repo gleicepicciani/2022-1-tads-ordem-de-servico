@@ -18,19 +18,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.edu.ifms.ordem.dto.OrdemDeServicoDTO;
-import br.edu.ifms.ordem.services.OrdemDeServicoService;
+import br.edu.ifms.ordem.dto.SetorDTO;
+import br.edu.ifms.ordem.services.SetorService;
 
+//controlador
 @RestController
-@RequestMapping(value = "/ordens") //padrão do recurso - mapeamento para as requisições
-public class OrdemDeServicoResource {
+@RequestMapping(value = "/setores")
+public class SetorResource {
 	
 	@Autowired
-	private OrdemDeServicoService service;
+	private SetorService service;	
 	
 	//para organizar as pesquisas por página
 		@GetMapping	
-		public ResponseEntity<Page<OrdemDeServicoDTO>> findAllPaged(
+		public ResponseEntity<Page<SetorDTO>> findAllPaged(
 				//essa notação garante que passe pela url parametros opcionais
 				@RequestParam(value = "page", defaultValue = "0") Integer page,
 				//linhas por página
@@ -41,42 +42,44 @@ public class OrdemDeServicoResource {
 			
 			PageRequest pageRequest = PageRequest.of(page, linesPerPage, 
 					Direction.valueOf(direction), orderBy);						
-			Page<OrdemDeServicoDTO> list = service.findAllPaged(pageRequest);			
+			Page<SetorDTO> list = service.findAllPaged(pageRequest);			
 			return ResponseEntity.ok().body(list);		
 		}	
+					
 		
 		//tipo da requisição - getMapping: pesquisa
 		@GetMapping(value = "/{id}")
-		//vai retornar apenas uma ordem, baseado no id que ele vai entregar 
-		public ResponseEntity<OrdemDeServicoDTO> findById(@PathVariable Long id){
+		//vai retornar apenas um setor, baseado no id que ele vai entregar 
+		public ResponseEntity<SetorDTO> findById(@PathVariable Long id){
 			
-			OrdemDeServicoDTO dto = service.findById(id); //ordem de serviço service
+			SetorDTO dto = service.findById(id); //setor service
 			//resposta baseado no tipo do método
 			return ResponseEntity.ok().body(dto);		
 		}
 		
-
+		
 		//mapeamento do post
 		@PostMapping
-		public ResponseEntity<OrdemDeServicoDTO> insert(@RequestBody OrdemDeServicoDTO dto){
+		public ResponseEntity<SetorDTO> insert(@RequestBody SetorDTO dto){
 			dto = service.insert(dto);	
 			//sessão criada
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 			return ResponseEntity.created(uri).body(dto);		
-		}
+		}		
 		
 		//só pode atualizar
 		@PutMapping(value = "/{id}")
-		public ResponseEntity<OrdemDeServicoDTO> update(@PathVariable Long id, @RequestBody OrdemDeServicoDTO dto){ //@PathVariable passa o valor que está na URL e @RequestBody são os valores que vem no corpo da requisição
+		public ResponseEntity<SetorDTO> update(@PathVariable Long id, @RequestBody SetorDTO dto){ //@PathVariable passa o valor que está na URL e @RequestBody são os valores que vem no corpo da requisição
 			dto = service.update(id, dto);
 			//responsável por empacotar todas as respostas
 			return ResponseEntity.ok().body(dto);
-		}
-					
+		}			
+		
 		//notação pra deletar
 		@DeleteMapping(value = "/{id}")
 		public ResponseEntity<Void> delete(@PathVariable Long id){
 			service.delete(id);
 			return ResponseEntity.noContent().build();		
-		}	
-	}
+		}			
+
+}

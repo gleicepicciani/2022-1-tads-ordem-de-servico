@@ -31,12 +31,16 @@ public class OrdemDeServico implements Serializable{
 	private Long id;
 	@Column(name = "descricao_problema")
 	private String descricaoProblema;
+	
 	@Column(name = "descricao_solucao")
 	private String descricaoSolucao;
+	
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
+	
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	
 	@Enumerated(EnumType.STRING)
 	private Prioridade prioridade;
 	
@@ -55,14 +59,9 @@ public class OrdemDeServico implements Serializable{
 	
 	public OrdemDeServico() {		
 	}
-
-	
-	
-
 	
 	public OrdemDeServico(Long id, String descricaoProblema, String descricaoSolucao, Date dataCadastro, Status status,
-			Prioridade prioridade, Tecnico tecnico) {
-		
+			Prioridade prioridade, Tecnico tecnico) {		
 		this.id = id;
 		this.descricaoProblema = descricaoProblema;
 		this.descricaoSolucao = descricaoSolucao;
@@ -74,22 +73,17 @@ public class OrdemDeServico implements Serializable{
 
 
 
-
-
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getDescricaoProblema() {
 		return descricaoProblema;
 	}
-
 
 	public void setDescricaoProblema(String descricaoProblema) {
 		this.descricaoProblema = descricaoProblema;
@@ -143,7 +137,6 @@ public class OrdemDeServico implements Serializable{
 	}
 
 
-
 	public Tecnico getTecnico() {
 		return tecnico;
 	}
@@ -151,14 +144,9 @@ public class OrdemDeServico implements Serializable{
 
 
 
-
 	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {

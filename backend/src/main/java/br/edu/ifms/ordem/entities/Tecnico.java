@@ -41,6 +41,7 @@ public class Tecnico implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updateAt;
 	
+	//construtor vazio
     public Tecnico() {		
 	}
 
